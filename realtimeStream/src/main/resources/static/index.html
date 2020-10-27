@@ -28,6 +28,7 @@
             enabled. Please enable Javascript and reload this page!
          </h2>
       </noscript>
+      <span>Device Location Data</span>
       <div id = "main-content" class = "container">
          <div class = "row">
             <div class = "col-md-6">
@@ -45,7 +46,29 @@
          </div>
          
          <div id="devicelocationData"></div>
+         
+         <span>Alert Data</span>
         
       </div>
+       <div id = "alert-content" class = "container">
+         <div class = "row">
+            <div class = "col-md-6">
+               <form class = "form-inline">
+                  <div class = "form-group">
+                     <label for = "connect">WebSocket connection:</label>
+                     <button id = "alert-connect" class = "btn btn-default" type = "submit">Connect for Alert Data</button>
+                     <button id = "alert-disconnect" class = "btn btn-default" type = "submit" disabled = "disabled">Disconnect with Alert Data
+                     </button>
+                  </div>
+               </form>
+            </div>
+            
+           
+         </div>
+         
+         <div id="alertEventData"></div>
+        
+      </div>
+      
    </body>
 </html>

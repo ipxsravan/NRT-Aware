@@ -2,10 +2,9 @@
 
 var ws;
 function setConnected(connected) {
-	$("#connect").prop("disabled", connected);
-	$("#disconnect").prop("disabled", !connected);
 	
 	$("#devicelocationData").html("");
+	$("#alertEventData").html("");
 }
 
 
@@ -13,6 +12,11 @@ function setConnected(connected) {
 function showMessage(message) {
 	
 	   $("#devicelocationData").prepend(message + "<br/>\n"+"<br/>");
+	}
+
+function showAlertData(message) {
+	
+	   $("#alertEventData").prepend(message + "<br/>\n"+"<br/>");
 	}
 
 $(function() {
@@ -28,18 +32,22 @@ $(function() {
 		disconnect();
 	});
 	
+	$("#alert-connect").click(function() {
+		alertDataConnect();
+	});
+	$("#alert-disconnect").click(function() {
+		disconnect();
+	});
+	
 });
 
 
 function connect() {
-	//connect to stomp where stomp endpoint is exposed
+	
 	var socket = new WebSocket("ws://192.168.22.236:8080/awareData");
 	ws = Stomp.over(socket);
 
 	ws.connect({}, function(frame) {
-		ws.subscribe("/topic/devicelocationData", function(message) {
-		});
-
 		ws.subscribe("/topic/devicelocationData", function(message) {
 			showMessage(message.body);
 		});
@@ -54,4 +62,19 @@ function disconnect() {
 	}
 	setConnected(false);
 	console.log("Disconnected");
+}
+
+
+function alertDataConnect(){
+	//var socket = new WebSocket("ws://localhost:8080/alertEventData");
+	var socket = new WebSocket("ws://192.168.22.236:8080/alertEventData");
+	ws = Stomp.over(socket);
+
+	ws.connect({}, function(frame) {
+		ws.subscribe("/topic/alertEventTopic", function(message) {
+			showAlertData(message.body);
+		});
+	}, function(error) {
+		$("#alertEventData").append(error + "<br />\n");
+	});
 }

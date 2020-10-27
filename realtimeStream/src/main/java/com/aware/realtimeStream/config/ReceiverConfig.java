@@ -1,7 +1,5 @@
 package com.aware.realtimeStream.config;
 
-import java.util.Arrays;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +14,7 @@ import org.springframework.jms.support.converter.MessageType;
 public class ReceiverConfig {
 	
 	  
-	  private String brokerUrl="tcp://localhost:61616";
+	  private String brokerUrl="tcp://192.168.22.236:61616";
 
 	  @Bean
 	  public ActiveMQConnectionFactory receiverActiveMQConnectionFactory() {
